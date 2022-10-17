@@ -1,4 +1,4 @@
-import { Http as NativeHttp } from "@capacitor-community/http";
+import { CapacitorHttp as NativeHttp } from "@capacitor/core";
 /**
  * XMLHttpRequest-based implementation of Http.Requester.
  */

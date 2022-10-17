@@ -1,7 +1,7 @@
 import { Http } from "code-push/script/acquisition-sdk";
 import type { Callback } from "./callbackUtil";
-import type { HttpResponse, HttpOptions } from "@capacitor-community/http";
-import { Http as NativeHttp } from "@capacitor-community/http";
+import type { HttpResponse, HttpOptions } from "@capacitor/core";
+import { CapacitorHttp as NativeHttp } from "@capacitor/core";
 
 
 /**

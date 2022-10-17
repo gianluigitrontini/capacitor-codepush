@@ -1,22 +1,18 @@
 {
-  "name": "capacitor-codepush",
-  "version": "1.0.0",
-  "description": "CodePush Plugin for Capacitor",
+  "name": "cap-codepush",
+  "version": "1.0.7",
+  "description": "Updated CodePush Plugin for Capacitor and Angular 14+. Working with Capacitor 4.",
   "module": "dist/esm/index.js",
   "types": "dist/esm/index.d.ts",
-  "homepage": "https://github.com/mapiacompany/capacitor-codepush",
-  "repository": "github:mapiacompany/capacitor-codepush",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
-  },
+  "homepage": "https://github.com/gianluigitrontini/capacitor-codepush",
+  "repository": "github:gianluigitrontini/capacitor-codepush",
   "scripts": {
     "lint": "npm run prettier -- --check && npm run swiftlint -- lint",
     "prettier": "prettier \"**/*.{css,html,ts,js,java}\"",
     "swiftlint": "node-swiftlint",
     "build": "npm run clean && tsc && rollup -c rollup.config.js",
     "clean": "rimraf ./dist",
-    "watch": "tsc --watch",
-    "prepublishOnly": "npm run build"
+    "watch": "tsc --watch"
   },
   "keywords": [
     "capacitor",
@@ -26,14 +22,13 @@
     "capacitor-android",
     "capacitor-ios"
   ],
-  "author": "MAPIACOMPANY",
+  "author": "Gianluigi Trontini",
   "license": "MIT",
   "devDependencies": {
-    "@capacitor-community/http": "^1.0.0",
-    "@capacitor/cli": "^3.0.0",
-    "@capacitor/device": "^1.0.0",
-    "@capacitor/dialog": "^1.0.0",
-    "@capacitor/filesystem": "^1.0.0",
+    "@capacitor/cli": "4.1.0",
+    "@capacitor/device": "^4.0.1",
+    "@capacitor/dialog": "^4.0.1",
+    "@capacitor/filesystem": "^4.1.0",
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
     "@rollup/plugin-node-resolve": "^11.1.0",
@@ -69,11 +64,10 @@
     "code-push": "^4.0.2"
   },
   "peerDependencies": {
-    "@capacitor-community/http": "^1.0.0",
-    "@capacitor/core": "^3.0.0",
-    "@capacitor/device": "^1.0.0",
-    "@capacitor/dialog": "^1.0.0",
-    "@capacitor/filesystem": "^1.0.0"
+    "@capacitor/core": "^4",
+    "@capacitor/device": "^4",
+    "@capacitor/dialog": "^4",
+    "@capacitor/filesystem": "^4"
   },
   "capacitor": {
     "android": {
@@ -81,11 +75,6 @@
     },
     "ios": {
       "src": "ios"
-    }
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   }
 }

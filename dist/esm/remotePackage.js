@@ -14,7 +14,7 @@ import { Package } from "./package";
 import { Sdk } from "./sdk";
 import { Directory, Filesystem } from "@capacitor/filesystem";
 import { FileUtil } from "./fileUtil";
-import { Http } from "@capacitor-community/http";
+import { CapacitorHttp as Http } from "@capacitor/core";
 /**
  * Defines a remote package, which represents an update package available for download.
  */
@@ -51,12 +51,15 @@ export class RemotePackage extends Package {
                 if (yield FileUtil.fileExists(Directory.Data, file)) {
                     yield Filesystem.deleteFile({ directory: Directory.Data, path: file });
                 }
-                yield Http.downloadFile({
+                const downloadedFile = yield Http.get({
                     url: this.downloadUrl,
                     method: "GET",
-                    filePath: file,
-                    fileDirectory: Directory.Data,
                     responseType: "blob"
+                });
+                yield Filesystem.writeFile({
+                    data: downloadedFile.data,
+                    path: file,
+                    directory: Directory.Data,
                 });
             }
             catch (e) {
