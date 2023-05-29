@@ -1,7 +1,7 @@
 {
   "name": "cap-codepush",
-  "version": "1.0.7",
-  "description": "Updated CodePush Plugin for Capacitor and Angular 14+. Working with Capacitor 4.",
+  "version": "2.0.0",
+  "description": "Updated CodePush Plugin for Capacitor and Angular 14+. Working with Capacitor 5.",
   "module": "dist/esm/index.js",
   "types": "dist/esm/index.d.ts",
   "homepage": "https://github.com/gianluigitrontini/capacitor-codepush",
@@ -64,10 +64,10 @@
     "code-push": "^4.0.2"
   },
   "peerDependencies": {
-    "@capacitor/core": "^4",
-    "@capacitor/device": "^4",
-    "@capacitor/dialog": "^4",
-    "@capacitor/filesystem": "^4"
+    "@capacitor/core": ">4",
+    "@capacitor/device": ">4",
+    "@capacitor/dialog": ">4",
+    "@capacitor/filesystem": ">4"
   },
   "capacitor": {
     "android": {
