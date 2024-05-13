@@ -1,19 +1,16 @@
 # Capacitor Plugin for CodePush
 
-This version is a fork of Mapiacompany's Capacitor Codepush, updated to work with newer Capacitor dependencies.
+This version is a fork of Mapiacompany's Capacitor Codepush, updated to work with the latest Capacitor.
 
 ### Install it using
 
 ```
-npm i cap-codepush@1 for Capacitor 4
-npm i cap-codepush@2 for Capacitor 5
+npm i cap-codepush@3 for Capacitor@6
+npm i cap-codepush@2 for Capacitor@5
+npm i cap-codepush@1 for Capacitor@4
 ```
 
-### Version 1.0.3
-
-- Removed deprecated @capacitor-community/http@next peer dependency.
-
-## ⬇ ORIGINAL README (with minor edits)
+## ⬇ ORIGINAL README
 
 <!-- Capacitor Catalog -->
 

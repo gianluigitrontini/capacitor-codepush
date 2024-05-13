@@ -546,7 +546,7 @@ var capacitorPlugin = (function (exports, acquisitionSdk, filesystem, core, devi
                         serverUrl,
                         ignoreAppVersion: false,
                         appVersion,
-                        clientUniqueId: device$1.uuid
+                        clientUniqueId: device$1.identifier
                     };
                     if (deploymentKey) {
                         Sdk.DefaultAcquisitionManager = new acquisitionSdk.AcquisitionManager(new HttpRequester(), Sdk.DefaultConfiguration);
