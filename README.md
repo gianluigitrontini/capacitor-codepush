@@ -5,6 +5,8 @@ This version is a fork of Mapiacompany's Capacitor Codepush, updated to work wit
 ### Install it using
 
 ```
+npm i cap-codepush@7 for Capacitor@7
+<!-- Old naming convention -->
 npm i cap-codepush@3 for Capacitor@6
 npm i cap-codepush@2 for Capacitor@5
 npm i cap-codepush@1 for Capacitor@4
