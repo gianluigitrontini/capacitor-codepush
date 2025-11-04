@@ -1,15 +1,28 @@
 # Capacitor Plugin for CodePush
 
-This version is a fork of Mapiacompany's Capacitor Codepush, updated to work with the latest Capacitor.
+This version is a fork of Mapiacompany's Capacitor Codepush, updated to work with the latest Capacitor. I use this daily in my company.
 
-### Installation
+## References
+
+#### Setup a Codepush Server
+- [https://github.com/lisong/code-push-server](https://github.com/lisong/code-push-server)
+
+#### Setup Codepush CLI
+- [https://github.com/shm-open/code-push-cli](https://github.com/shm-open/code-push-cli)
+
+#### Take a look at the original README for this project
+I simplified this documentation to provide a quick Getting Started. For any doubt or extended functionality, consult the original README:
+- [ORIGINAL_README.md](/ORIGINAL_README.md)
+
+
+## Install the plugin to your Capacitor project
 
 #### Capacitor 7
 ```
 npm i cap-codepush@7
 ```
 
-#### Previous versions
+### Previous versions
 Old naming convention
 
 #### Capacitor 6
@@ -25,11 +38,16 @@ npm i cap-codepush@2
 npm i cap-codepush@1
 ```
 
-### Add App to the CodePush Server
+## Add App to the CodePush Server via CLI
+
+### Install the CLI
+- [https://github.com/shm-open/code-push-cli](https://github.com/shm-open/code-push-cli)
 
 ### Authentication
 
-**Authenticate the CLI**
+#### Authenticate the CLI to your server
+Don't have a Codepush Server?
+- [https://github.com/lisong/code-push-server](https://github.com/lisong/code-push-server)
 
 ```bash
 code-push register https://your-codepush-server-ip:10443
@@ -60,17 +78,12 @@ code-push app add myapp-android android cordova
 
 ### Project Integration
 
-**Install the `cap-codepush` package in your project**
-
-```bash
-npm i cap-codepush
-```
-
 Add the following snippet in `app.component.ts`:
 
+Example with Ionic+Angular
 ```ts
 ngOnInit() {
-  if (this.platform.is("hybrid")) {
+  if (this.platform.is("capacitor")) {
     await this.initializeCodepush();
   }
 }
@@ -108,40 +121,18 @@ plugins: {
 }
 ```
 
-To list all registered projects:
-
-```bash
-code-push app ls
-```
-
-To view deployment keys for a specific project:
-
-```bash
-code-push deployment ls <project-name> -k
-```
-
-## Releasing a New Version
+## Releasing a New Version of Your App
 
 The **path to the `public` folder** is always:
 
 - Android: `android/app/src/main/assets/public/`
     
 - iOS: `ios/App/App/public/`
-    
-
-#### Automatic Release
-
-Run the release process (example using Fastlane):
-
-```bash
-bundle exec fastlane cp_release
-```
 
 #### Manual Release
 
 ```bash
 ionic cap sync # synchronize Ionic with native project
-
 code-push release <app-name> <public-folder-path> <target-version> -d <deployment>
 
 # Example:
