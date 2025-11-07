@@ -1,6 +1,6 @@
 .DS_Store
 #ignore the files built by npm install
-node_modules/*
+node_modules/
 
 #ignore the compiled files
 bin/*
