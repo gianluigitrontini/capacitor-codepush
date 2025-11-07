@@ -66,7 +66,7 @@ export interface NativeCodePushPlugin {
     getAppVersion(): Promise<PluginCallResponse<string>>;
     getNativeBuildTime(): Promise<PluginCallResponse<string>>;
     unzip(options: NativeUnzipOptions): Promise<void>;
-
+    sync(syncOptions?: any, downloadProgress?: any): Promise<any>;
     addListener(eventName: "codePushStatus", listenerFunc: (info: any) => void): void;
 }
 
