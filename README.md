@@ -82,30 +82,30 @@ Add the following snippet in `app.component.ts`:
 
 Example with Ionic+Angular
 ```ts
-ngOnInit() {
-  if (this.platform.is("capacitor")) {
+import { CodePush, InstallMode } from 'cap-codepush';
+
+async ngOnInit() {
     await this.initializeCodepush();
-  }
 }
 
 private async initializeCodepush() {
-  codePush
-    .sync({
-      onSyncStatusChanged: (syncStatus) => {},
-      installMode: InstallMode.IMMEDIATE,
-    })
-    .then(
-      (status) => {
-        if (status) {
-          console.log(status);
-        }
-      },
-      (error) => {
-        if (error) {
-          console.log(error);
-        }
+  CodePush.sync({
+    onSyncStatusChanged: (syncStatus) => { 
+      console.log('Sync status changed: ', syncStatus);
+    },
+    installMode: InstallMode.IMMEDIATE,
+  }).then(
+    (status) => {
+      if (status) {
+        console.log(status);
       }
-    );
+    },
+    (error) => {
+      if (error) {
+        console.log(error);
+      }
+    }
+  );
 }
 ```
 
