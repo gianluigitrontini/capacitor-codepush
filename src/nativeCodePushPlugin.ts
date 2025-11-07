@@ -7,6 +7,10 @@
 
 import { InstallOptions } from "./installOptions";
 import { registerPlugin } from "@capacitor/core";
+import { SyncOptions } from "./syncOptions";
+import { SuccessCallback } from "./callbackUtil";
+import { DownloadProgress } from "./package";
+import { SyncStatus } from "./syncStatus";
 
 interface StatusReport {
     status: number;
@@ -66,7 +70,7 @@ export interface NativeCodePushPlugin {
     getAppVersion(): Promise<PluginCallResponse<string>>;
     getNativeBuildTime(): Promise<PluginCallResponse<string>>;
     unzip(options: NativeUnzipOptions): Promise<void>;
-    sync(syncOptions?: any, downloadProgress?: any): Promise<any>;
+    sync(syncOptions?: SyncOptions, downloadProgress?: SuccessCallback<DownloadProgress>): Promise<SyncStatus>;
     addListener(eventName: "codePushStatus", listenerFunc: (info: any) => void): void;
 }
 
