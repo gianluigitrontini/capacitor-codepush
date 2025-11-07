@@ -9,3 +9,5 @@ bin/*
 test-*
 
 .idea
+
+/dist
