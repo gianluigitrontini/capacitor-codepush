@@ -431,6 +431,16 @@ public class CodePush extends Plugin {
     private void navigateToLocalDeploymentIfExists() {
         CodePushPackageMetadata deployedPackageMetadata = this.codePushPackageManager.getCurrentPackageMetadata();
         if (deployedPackageMetadata != null && deployedPackageMetadata.localPath != null) {
+            File startPage = this.getStartPageForPackage(deployedPackageMetadata.localPath);
+            if (startPage == null) {
+                Utilities.logMessage("CodePush deployment is invalid, falling back to bundled assets: " + deployedPackageMetadata.localPath);
+                this.codePushPackageManager.cleanDeployments();
+                this.codePushPackageManager.clearFailedUpdates();
+                this.codePushPackageManager.clearPendingInstall();
+                this.codePushPackageManager.clearInstallNeedsConfirmation();
+                this.codePushPackageManager.clearBinaryFirstRunFlag();
+                return;
+            }
             this.bridge.setServerBasePath(this.getBasePathForPackage(deployedPackageMetadata.localPath));
         }
     }
