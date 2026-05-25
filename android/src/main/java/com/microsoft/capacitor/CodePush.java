@@ -431,6 +431,8 @@ public class CodePush extends Plugin {
     private void navigateToLocalDeploymentIfExists() {
         CodePushPackageMetadata deployedPackageMetadata = this.codePushPackageManager.getCurrentPackageMetadata();
         if (deployedPackageMetadata != null && deployedPackageMetadata.localPath != null) {
+            // UTSOURCE fix: stale CodePush metadata can point Capacitor's localhost server to a missing package.
+            // Validate the start page before switching from bundled assets to the downloaded deployment.
             File startPage = this.getStartPageForPackage(deployedPackageMetadata.localPath);
             if (startPage == null) {
                 Utilities.logMessage("CodePush deployment is invalid, falling back to bundled assets: " + deployedPackageMetadata.localPath);
