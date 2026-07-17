@@ -86,8 +86,8 @@ export class FileUtil {
         if (await FileUtil.directoryExists(destinationDir.directory, destinationDir.path)) {
             const { files } = await Filesystem.readdir(sourceDir);
             for (let i = 0; i < files.length; i++) {
-                const file = files[i];
-                // @ts-ignore
+                const entry = files[i];
+                const file = typeof entry === "string" ? entry : entry.name;
                 if (ignoreList.includes(file)) continue;
                 const sourcePath = sourceDir.path + "/" + file;
                 const destPath = destinationDir.path + "/" + file;
@@ -96,6 +96,9 @@ export class FileUtil {
                 if (await FileUtil.directoryExists(source.directory, source.path)) { // is directory
                     await FileUtil.copyDirectoryEntriesTo(source, destination);
                 } else { // is file
+                    if (await FileUtil.fileExists(destination.directory, destination.path)) {
+                        await Filesystem.deleteFile({ directory: destination.directory, path: destination.path });
+                    }
                     await FileUtil.copy(source, destination);
                 }
             }
