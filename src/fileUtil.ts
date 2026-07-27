@@ -1,12 +1,22 @@
 import { Directory, GetUriOptions, Filesystem, Encoding } from "@capacitor/filesystem";
 import { Callback } from "./callbackUtil";
+import { CodePush as NativeCodePush } from "./nativeCodePushPlugin";
 
 
 /**
  * File utilities for CodePush.
  */
 export class FileUtil {
+    private static async getDataEntryType(path: string): Promise<string | null> {
+        const result = await NativeCodePush.getDataEntryType({ path });
+        return result.value ?? null;
+    }
+
     public static async directoryExists(directory: Directory, path: string): Promise<boolean> {
+        if (directory === Directory.Data) {
+            return (await FileUtil.getDataEntryType(path)) === "directory";
+        }
+
         try {
             const statResult = await Filesystem.stat({ directory, path });
             // directory for Android, NSFileTypeDirectory for iOS
@@ -22,6 +32,10 @@ export class FileUtil {
     }
 
     public static async fileExists(directory: Directory, path: string): Promise<boolean> {
+        if (directory === Directory.Data) {
+            return (await FileUtil.getDataEntryType(path)) === "file";
+        }
+
         try {
             const statResult = await Filesystem.stat({ directory, path });
             // file for Android, NSFileTypeRegular for iOS
@@ -72,8 +86,8 @@ export class FileUtil {
         if (await FileUtil.directoryExists(destinationDir.directory, destinationDir.path)) {
             const { files } = await Filesystem.readdir(sourceDir);
             for (let i = 0; i < files.length; i++) {
-                const file = files[i];
-                // @ts-ignore
+                const entry = files[i];
+                const file = typeof entry === "string" ? entry : entry.name;
                 if (ignoreList.includes(file)) continue;
                 const sourcePath = sourceDir.path + "/" + file;
                 const destPath = destinationDir.path + "/" + file;
@@ -82,6 +96,9 @@ export class FileUtil {
                 if (await FileUtil.directoryExists(source.directory, source.path)) { // is directory
                     await FileUtil.copyDirectoryEntriesTo(source, destination);
                 } else { // is file
+                    if (await FileUtil.fileExists(destination.directory, destination.path)) {
+                        await Filesystem.deleteFile({ directory: destination.directory, path: destination.path });
+                    }
                     await FileUtil.copy(source, destination);
                 }
             }

@@ -10,9 +10,9 @@
     s.homepage = package['homepage']
     s.author = package['author']
     s.source = { :git => package['repository'], :tag => s.version.to_s }
-    s.source_files = 'ios/Plugin/**/*.{swift,h,m,c,cc,mm,cpp}'
+    s.source_files = 'ios/Plugin/**/*.{swift,h,m,c,cc,mm,cpp}', 'ios/ZipFoundationSupport/**/*.{swift,h,m,c,cc,mm,cpp}'
     s.ios.deployment_target  = '12.0'
     s.dependency 'Capacitor'
-    s.dependency 'SSZipArchive'
+    s.dependency 'ZIPFoundation', '~> 0.9'
     s.swift_version = '5.0'
   end

@@ -25,6 +25,7 @@ CAP_PLUGIN(CodePushPlugin, "CodePush",
            CAP_PLUGIN_METHOD(reportSucceeded, CAPPluginReturnPromise);
            CAP_PLUGIN_METHOD(restartApplication, CAPPluginReturnNone);
            CAP_PLUGIN_METHOD(getBinaryHash, CAPPluginReturnPromise);
+           CAP_PLUGIN_METHOD(getDataEntryType, CAPPluginReturnPromise);
            CAP_PLUGIN_METHOD(getPackageHash, CAPPluginReturnPromise);
            CAP_PLUGIN_METHOD(decodeSignature, CAPPluginReturnPromise);
            CAP_PLUGIN_METHOD(getPublicKey, CAPPluginReturnPromise);

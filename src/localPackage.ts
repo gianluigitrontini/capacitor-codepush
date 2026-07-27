@@ -415,9 +415,15 @@ export class LocalPackage extends Package implements ILocalPackage {
      * @param callback In case of an error, this function will be called with the error as the fist parameter.
      */
     public static async backupPackageInformationFile(): Promise<void> {
+        const currentPackagePath =
+            LocalPackage.RootDir + "/" + LocalPackage.PackageInfoFile;
+        if (!(await FileUtil.fileExists(Directory.Data, currentPackagePath))) {
+            return;
+        }
+
         const source: GetUriOptions = {
             directory: Directory.Data,
-            path: LocalPackage.RootDir + "/" + LocalPackage.PackageInfoFile
+            path: currentPackagePath
         };
 
         const destination: GetUriOptions = {
@@ -451,7 +457,14 @@ export class LocalPackage extends Package implements ILocalPackage {
         };
 
         try {
-            const content = await FileUtil.readDataFile(LocalPackage.RootDir + "/" + packageFile);
+            const packagePath = LocalPackage.RootDir + "/" + packageFile;
+            if (!(await FileUtil.fileExists(Directory.Data, packagePath))) {
+                packageError &&
+                    packageError(new Error("Package information file does not exist."));
+                return;
+            }
+
+            const content = await FileUtil.readDataFile(packagePath);
             const packageInfo: IPackageInfoMetadata = JSON.parse(content);
             LocalPackage.getLocalPackageFromMetadata(packageInfo).then(packageSuccess, packageError);
         } catch (e) {

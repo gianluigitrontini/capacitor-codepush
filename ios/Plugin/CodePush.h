@@ -1,7 +1,6 @@
+#import <Capacitor/CAPBridgedPlugin.h>
+#import <Capacitor/CAPPlugin.h>
 #import <UIKit/UIKit.h>
-#import "CAPPlugin.h"
-#import "CAPBridgedPlugin.h"
-
 
 @class CAPPluginCall;
 

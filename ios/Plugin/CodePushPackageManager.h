@@ -1,18 +1,19 @@
 #import "CodePushPackageMetadata.h"
 #import "InstallOptions.h"
+#import <Foundation/Foundation.h>
 
 @interface CodePushPackageManager : NSObject
 
 + (void)cleanOldPackage;
 + (void)revertToPreviousVersion;
-+ (CodePushPackageMetadata*)getCurrentPackageMetadata;
++ (CodePushPackageMetadata *)getCurrentPackageMetadata;
 + (void)clearFailedUpdates;
 + (void)cleanDeployments;
-+ (NSString*)getCachedBinaryHash;
-+ (void)saveBinaryHash:(NSString*)binaryHash;
-+ (BOOL)isFailedHash:(NSString*)packageHash;
++ (NSString *)getCachedBinaryHash;
++ (void)saveBinaryHash:(NSString *)binaryHash;
++ (BOOL)isFailedHash:(NSString *)packageHash;
 + (void)savePendingInstall:(InstallOptions *)installOptions;
-+ (InstallOptions*)getPendingInstall;
++ (InstallOptions *)getPendingInstall;
 + (void)clearPendingInstall;
 + (void)markInstallNeedsConfirmation;
 + (BOOL)installNeedsConfirmation;

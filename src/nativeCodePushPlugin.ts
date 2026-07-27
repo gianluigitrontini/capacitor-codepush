@@ -57,6 +57,7 @@ export interface NativeCodePushPlugin {
     getPublicKey(): Promise<PluginCallResponse<string>>;
     decodeSignature(options: NativeDecodeSignatureOptions): Promise<PluginCallResponse<string>>;
     getBinaryHash(): Promise<PluginCallResponse<string>>;
+    getDataEntryType(options: NativePathOptions): Promise<PluginCallResponse<string | null>>;
     getPackageHash(options: NativePathOptions): Promise<PluginCallResponse<string>>;
     notifyApplicationReady(): Promise<void>;
     isFirstRun(options: NativeHashOptions): Promise<PluginCallResponse<boolean>>;

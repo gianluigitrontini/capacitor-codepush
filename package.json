@@ -2,6 +2,19 @@
   "name": "cap-codepush",
   "version": "8.0.0",
   "description": "CodePush Plugin for Capacitor. Working with Capacitor 8.",
+  "files": [
+    "android/",
+    "dist/",
+    "ios/Plugin/",
+    "ios/ZipFoundationSupport/",
+    "Package.swift",
+    "CapCodePush.podspec",
+    "README.md",
+    "ORIGINAL_README.md",
+    "LICENSE.md",
+    "SUPPORT.md",
+    "typings/"
+  ],
   "module": "dist/esm/index.js",
   "types": "dist/esm/index.d.ts",
   "homepage": "https://github.com/gianluigitrontini/capacitor-codepush",
@@ -11,6 +24,7 @@
     "prettier": "prettier \"**/*.{css,html,ts,js,java}\"",
     "swiftlint": "node-swiftlint",
     "build": "npm run clean && tsc && rollup -c rollup.config.js",
+    "prepare": "npm run build",
     "clean": "rimraf ./dist",
     "watch": "tsc --watch"
   },
@@ -58,7 +72,7 @@
     "run-sequence": "^2.2.1",
     "semantic-release": "^17.3.7",
     "tslint": "^6.1.3",
-    "typescript": "~4.2.4"
+    "typescript": "~5.4.5"
   },
   "dependencies": {
     "code-push": "^4.0.2"

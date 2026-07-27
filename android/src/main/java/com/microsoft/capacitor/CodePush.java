@@ -15,6 +15,7 @@ import com.nimbusds.jose.crypto.RSASSAVerifier;
 import com.nimbusds.jwt.SignedJWT;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -180,6 +181,27 @@ public class CodePush extends Plugin {
         } else {
             call.resolve(jsObjectValue(cachedBinaryHash));
         }
+    }
+
+    @PluginMethod()
+    public void getDataEntryType(PluginCall call) {
+        String relativePath = call.getString("path");
+        JSObject ret = new JSObject();
+
+        if (relativePath == null) {
+            ret.put("value", JSONObject.NULL);
+            call.resolve(ret);
+            return;
+        }
+
+        File target = new File(getContext().getFilesDir(), relativePath);
+        if (!target.exists()) {
+            ret.put("value", JSONObject.NULL);
+        } else {
+            ret.put("value", target.isDirectory() ? "directory" : "file");
+        }
+
+        call.resolve(ret);
     }
 
     @PluginMethod()
@@ -409,6 +431,18 @@ public class CodePush extends Plugin {
     private void navigateToLocalDeploymentIfExists() {
         CodePushPackageMetadata deployedPackageMetadata = this.codePushPackageManager.getCurrentPackageMetadata();
         if (deployedPackageMetadata != null && deployedPackageMetadata.localPath != null) {
+            // UTSOURCE fix: stale CodePush metadata can point Capacitor's localhost server to a missing package.
+            // Validate the start page before switching from bundled assets to the downloaded deployment.
+            File startPage = this.getStartPageForPackage(deployedPackageMetadata.localPath);
+            if (startPage == null) {
+                Utilities.logMessage("CodePush deployment is invalid, falling back to bundled assets: " + deployedPackageMetadata.localPath);
+                this.codePushPackageManager.cleanDeployments();
+                this.codePushPackageManager.clearFailedUpdates();
+                this.codePushPackageManager.clearPendingInstall();
+                this.codePushPackageManager.clearInstallNeedsConfirmation();
+                this.codePushPackageManager.clearBinaryFirstRunFlag();
+                return;
+            }
             this.bridge.setServerBasePath(this.getBasePathForPackage(deployedPackageMetadata.localPath));
         }
     }

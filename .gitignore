@@ -1,9 +1,12 @@
 .DS_Store
 #ignore the files built by npm install
 node_modules/
+.npm-cache/
 
 #ignore the compiled files
 bin/*
+.build/
+build/
 
 #ignore the test output files
 test-*
@@ -11,3 +14,4 @@ test-*
 .idea
 
 /dist
+package-lock.json
